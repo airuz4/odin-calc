@@ -1,17 +1,17 @@
 function add(...parameters){
-    return parameters.reduce((sum, item) => sum += item,0)
+    return parameters.reduce((sum, item) => sum += item)
 }
 
 function subtract(...parameters){
-    return parameters.reduce((difference, item) => difference -= item, 0)
+    return parameters.reduce((difference, item) => difference -= item)
 }
 
 function multiply(...parameters){
-    return parameters.reduce((product, item) => product *= item,1)
+    return parameters.reduce((product, item) => product *= item)
 }
 
 function divide(...parameters){
-    return parameters.reduce((quotient, item) => quotient /= item, 1)
+    return parameters.reduce((quotient, item) => quotient /= item)
 }
 
 
@@ -30,10 +30,8 @@ function operate(x, operand, y){
     }
 
 }
-
-
 const display = document.querySelector('.display');
-const operands = '/+*-';
+const operands = '/+*-=';
 const inputButton = document.querySelector('.calc-inputs');
 let step = 0;
 let firstNum = 0;
@@ -54,18 +52,19 @@ inputButton.addEventListener('mouseup', (e) =>{
             firstNum = Number(display.innerText);
             operand = input;
             step++;
+
         } 
-        else if (step == 2){
+        else if (step == 2 || input == '='){
             secondNum = Number(display.innerText);
-            display.innerText = operate(firstNum, operand, secondNum);
+            total = operate(firstNum, operand, secondNum);
+            display.innerText = total;
+            firstNum = total;
             step = 0;
         }
+        else if (step == 3){
+            step = 1;
+        }
         
-    }
-    else if (input == '='){
-            secondNum = Number(display.innerText);
-            display.innerText = operate(firstNum, operand, secondNum);
-            step = 0;
     }
     else{
         if(step == 0 || step == 2){
@@ -73,7 +72,7 @@ inputButton.addEventListener('mouseup', (e) =>{
         }
         else{
             display.innerText = input;
-            step++
+            step = 2;
         }
     }
 
