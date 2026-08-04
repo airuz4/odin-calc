@@ -40,29 +40,18 @@ function operate(x, operand, y){
 
 const display = document.querySelector('.display');
 
-const numButton = document.querySelector('.calc-num');
-const operateButton = document.querySelector('.calc-operate');
+const inputButton = document.querySelector('.calc-inputs');
 
-operateButton.addEventListener('click', (e) =>{
+inputButton.addEventListener('mouseup', (e) =>{
     let input = e.target.innerText;
     if (input == 'CE'){
         display.innerText = '';
     }
-    else if (input == '/'){
-        display.innerText += ' /';
+    else {
+       display.innerText += input;
     }
-    else if (input == '*'){
-        display.innerText += ' *';
-    }
-    else if (input == '+'){
-        display.innerText += ' +';
-    }
-    else if (input == '-'){
-        display.innerText += ' -';
-    }
-    else if (input == '='){
 
-    }
+
 })
 
 
