@@ -10,6 +10,68 @@ body{
 }
 
 .calc-box{
+    width: 400px;
+    height: 500px;
     display: flex;
     background-color: gray;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.calc-display{
+    background-color: aliceblue;
+    flex: .3;
+    display: flex;
+    padding: 10px;
+}
+
+
+.num-display{
+    flex: 1 1 auto;
+    background-color: darkolivegreen;
+    text-align: right;
+    padding: 20px;
+    font-size: 56px;
+}
+
+.calc-inputs{
+    background-color: antiquewhite;
+    flex: 2 2 auto;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin-top: 4px;
+}
+
+.calc-num{
+    background-color: orange;
+    flex: 2 2 auto;
+    margin-right: 4px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.calc-operate{
+    background-color: blueviolet;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.num, .operate{
+    border: 1px solid black;
+    flex: 1 1 30%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.operate{
+    flex: 1 1 auto;
+}
+
+.zero{
+    flex: 1 1 64%; 
 }
