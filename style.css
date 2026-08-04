@@ -26,7 +26,7 @@ body{
 }
 
 
-.num-display{
+.display{
     flex: 1 1 auto;
     background-color: darkolivegreen;
     text-align: right;
