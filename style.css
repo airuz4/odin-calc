@@ -35,9 +35,9 @@ button {
 .display{
     flex: 1 1 auto;
     background-color: darkolivegreen;
-    text-align: right;
     font-size: 56px;
     padding: 10px;
+    text-align: right;
     
 }
 

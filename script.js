@@ -48,7 +48,7 @@ inputButton.addEventListener('mouseup', (e) =>{
         step = 0;
     }
     else if (operands.includes(input)){
-        if(step == 0){
+        if(step == 0 || step == 1){
             firstNum = Number(display.innerText);
             operand = input;
             step++;
@@ -59,11 +59,12 @@ inputButton.addEventListener('mouseup', (e) =>{
             total = operate(firstNum, operand, secondNum);
             display.innerText = total;
             firstNum = total;
-            step = 0;
-        }
-        else if (step == 3){
             step = 1;
+            if (input != '='){
+                operand = input;
+            }
         }
+
         
     }
     else{
