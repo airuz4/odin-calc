@@ -38,3 +38,37 @@ function operate(x, operand, y){
 }
 
 
+const display = document.querySelector('.display');
+
+const numButton = document.querySelector('.calc-num');
+const operateButton = document.querySelector('.calc-operate');
+
+operateButton.addEventListener('click', (e) =>{
+    let input = e.target.innerText;
+    if (input == 'CE'){
+        display.innerText = '';
+    }
+    else if (input == '/'){
+        display.innerText += ' /';
+    }
+    else if (input == '*'){
+        display.innerText += ' *';
+    }
+    else if (input == '+'){
+        display.innerText += ' +';
+    }
+    else if (input == '-'){
+        display.innerText += ' -';
+    }
+    else if (input == '='){
+
+    }
+})
+
+
+
+
+
+
+
+

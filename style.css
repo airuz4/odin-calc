@@ -9,6 +9,12 @@ body{
     align-items: center;
 }
 
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
 .calc-box{
     width: 400px;
     height: 500px;
@@ -20,9 +26,9 @@ body{
 
 .calc-display{
     background-color: aliceblue;
-    flex: .3;
     display: flex;
     padding: 10px;
+    height: 80px;
 }
 
 
@@ -30,8 +36,9 @@ body{
     flex: 1 1 auto;
     background-color: darkolivegreen;
     text-align: right;
-    padding: 20px;
     font-size: 56px;
+    padding: 10px;
+    
 }
 
 .calc-inputs{
@@ -72,9 +79,4 @@ body{
 
 .zero{
     flex: 1 1 64%; 
-}
-
-button {
-  all: unset;
-  cursor: pointer;
 }
