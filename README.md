@@ -3,8 +3,7 @@
 wow calculator amazing
 
 known issues: 
-messy ass code bruih step 0 and 2 just do true or false
-
+messy ass code
 Add a “backspace” button[x]
 Add keyboard support![x]
 
