@@ -28,7 +28,7 @@ button {
     background-color: aliceblue;
     display: flex;
     padding: 10px;
-    height: 80px;
+    flex-wrap: wrap;
 }
 
 
@@ -36,9 +36,10 @@ button {
     flex: 1 1 auto;
     background-color: darkolivegreen;
     font-size: 56px;
-    padding: 10px;
     text-align: right;
-    
+    min-height: 60px;
+    width: 100%;
+    overflow-x: auto;
 }
 
 .calc-inputs{

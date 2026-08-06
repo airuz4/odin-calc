@@ -1,17 +1,20 @@
-function add(...parameters){
-    return parameters.reduce((sum, item) => sum += item)
+function add(x, y){
+    return x + y;
 }
 
-function subtract(...parameters){
-    return parameters.reduce((difference, item) => difference -= item)
+function subtract(x, y){
+    return x - y;
 }
 
-function multiply(...parameters){
-    return parameters.reduce((product, item) => product *= item)
+function multiply(x, y){
+    return x * y;
 }
 
-function divide(...parameters){
-    return parameters.reduce((quotient, item) => quotient /= item)
+function divide(x, y){
+    if (y == 0) {
+        return 'You cant divide by 0';
+    }
+    return x / y;
 }
 
 
@@ -32,54 +35,74 @@ function operate(x, operand, y){
 }
 const display = document.querySelector('.display');
 const operands = '/+*-=';
+const values = '1234567890.'
 const inputButton = document.querySelector('.calc-inputs');
-let step = 0;
-let firstNum = 0;
-let operand;
-let secondNum = 0;
+
+let nextNum = false;
+
+let firstNum;
+let operand = '';
+let secondNum;
+let total;
+let result = false;
+
+function cleanOperation() {
+    display.innerText = '';
+    firstNum = undefined;
+    operand = '';
+    secondNum = undefined;
+    nextNum = false;
+    total = undefined;
+    result = false;
+}
 
 inputButton.addEventListener('mouseup', (e) =>{
     let input = e.target.innerText;
     if (input == 'CE'){
-        display.innerText = '';
-        firstNum = 0;
-        operand = '';
-        secondNum = 0;
-        step = 0;
+        cleanOperation();
     }
-    else if (operands.includes(input)){
-        if(step == 0){
+    else if (operands.includes(input) && display.innerText != ''){
+        if(nextNum == false && input != '='){
             firstNum = Number(display.innerText);
             operand = input;
-            step++;
-
         } 
-        else if (step == 2 || (step == 2 && input == '=') ){
+        else if (nextNum == true){
             secondNum = Number(display.innerText);
             total = operate(firstNum, operand, secondNum);
-            display.innerText = total;
+            if (String(total).includes('.')){
+                display.innerText = total.toFixed(4);
+            }
+            else{
+                display.innerText = total;
+            }
             firstNum = total;
-            step = 1;
+            nextNum = false;
+            operand = '';
+            result = true;
+
             if (input != '='){
                 operand = input;
-            }
+                }
         }
-
-        
+        else if (input == '='){
+            
+        }
     }
-    else{
-        if(step == 0 || step == 2){
-            display.innerText += input;
+    else if ((!(display.innerText.includes('.') && input == '.')) && values.includes(input) ){
+        
+        if (operand != '' && nextNum == false){
+                display.innerText = input;
+                nextNum = true;
+            }
+        else if (result == true){
+            display.innerText = input;
         }
         else{
-            display.innerText = input;
-            step = 2;
+            display.innerText += input;
         }
     }
-
-
-})
-
+}
+)
 
 
 
