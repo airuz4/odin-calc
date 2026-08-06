@@ -70,7 +70,10 @@ button {
     border: 1px solid black;
     flex: 1 1 30%;
     text-align: center;
-    
+}
+
+.num:hover, .operate:hover{
+    background-color: white;
 }
 
 .operate{
