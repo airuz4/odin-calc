@@ -61,6 +61,12 @@ inputButton.addEventListener('mouseup', (e) =>{
     if (input == 'CE'){
         cleanOperation();
     }
+       else if (input == 'DEL'){
+        display.innerText = display.innerText.slice(0, -1)
+            if (operands.includes(display.innerText.slice(0, -1))){
+            operand = '';
+            }
+        }
     else if (operands.includes(input) && display.innerText != ''){
         if(nextNum == false && input != '='){
             firstNum = Number(display.innerText);
