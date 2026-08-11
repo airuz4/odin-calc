@@ -58,10 +58,10 @@ function cleanOperation() {
 
 inputButton.addEventListener('mouseup', (e) =>{
     let input = e.target.innerText;
-    if (input == 'CE'){
+    if (input == 'CE' || (input == 'DEL' && result)){
         cleanOperation();
     }
-       else if (input == 'DEL'){
+    else if (input == 'DEL'){
         display.innerText = display.innerText.slice(0, -1)
             if (operands.includes(display.innerText.slice(0, -1))){
             operand = '';
@@ -70,7 +70,14 @@ inputButton.addEventListener('mouseup', (e) =>{
     else if (operands.includes(input) && display.innerText != ''){
         if(nextNum == false && input != '='){
             firstNum = Number(display.innerText);
+            if (operand == ''){
+                display.innerText += input;
+            }
+            else{
+                display.innerText = display.innerText.slice(0, -1) + input;
+            }
             operand = input;
+            
         } 
         else if (nextNum == true){
             secondNum = Number(display.innerText);
