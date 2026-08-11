@@ -95,6 +95,7 @@ inputButton.addEventListener('mouseup', (e) =>{
 
             if (input != '='){
                 operand = input;
+                display.innerText += operand;
                 }
         }
         else if (input == '='){
