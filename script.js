@@ -130,6 +130,29 @@ inputButton.addEventListener('mouseup', (e) =>{
 }
 )
 
+window.addEventListener('keyup', (e) => {
+    let input = e.key;
+    const numButton = values.includes(input);
+    const operateButton = operands.includes(input);
+    const deleteButton = input == 'Backspace';
+    const equalButton = input == 'Enter';
+
+    if (numButton || operateButton || deleteButton || equalButton){
+        if (equalButton){
+            input = '=';
+            operateInput(input);
+        }
+        else if (deleteButton){
+            deleteInput();
+            }
+        else if (operateButton){
+            operateInput(input);
+        }
+        else if (numButton){
+            numberInput(input);
+        }
+    }
+})
 
 
 
