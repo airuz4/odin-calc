@@ -56,23 +56,21 @@ function cleanOperation() {
     result = false;
 }
 
-inputButton.addEventListener('mouseup', (e) =>{
-    let input = e.target.innerText;
-    const clearButton = input == 'CE' || (input == 'DEL' && result);
-    const deleteButton = input == 'DEL';
-    const operateButton = operands.includes(input) && display.innerText != '';
-    const numButton = (!(display.innerText.includes('.') && input == '.')) && values.includes(input);
-    if (clearButton){
-        cleanOperation();
-    }
-    else if (deleteButton){
-        display.innerText = display.innerText.slice(0, -1)
-            if (operands.includes(display.innerText.slice(0, -1))){
-            operand = '';
+function numberInput(input) {
+        if (operand != '' && !nextNum){
+                display.innerText = input;
+                nextNum = true;
             }
+        else if (result){
+            display.innerText = input;
         }
-    else if (operateButton){
-        if(!nextNum && input != '='){
+        else{
+            display.innerText += input;
+        }
+}
+
+function operateInput(input){
+    if(!nextNum && input != '='){
             firstNum = Number(display.innerText);
             if (operand == ''){
                 display.innerText += input;
@@ -101,19 +99,33 @@ inputButton.addEventListener('mouseup', (e) =>{
                 display.innerText += operand;
                 }
         }
+}
+
+function deleteInput(){
+    if (operands.includes(display.innerText.slice(-1))){
+            operand = '';
+            }
+        display.innerText = display.innerText.slice(0, -1)
+}
+
+
+inputButton.addEventListener('mouseup', (e) =>{
+    let input = e.target.innerText;
+    const clearButton = input == 'CE' || (input == 'DEL' && result);
+    const deleteButton = input == 'DEL';
+    const operateButton = operands.includes(input) && display.innerText != '';
+    const numButton = (!(display.innerText.includes('.') && input == '.')) && values.includes(input);
+    if (clearButton){
+        cleanOperation();
+    }
+    else if (deleteButton){
+        deleteInput();
+        }
+    else if (operateButton){
+        operateInput(input);
     }
     else if (numButton){
-        
-        if (operand != '' && !nextNum){
-                display.innerText = input;
-                nextNum = true;
-            }
-        else if (result){
-            display.innerText = input;
-        }
-        else{
-            display.innerText += input;
-        }
+        numberInput(input);
     }
 }
 )
