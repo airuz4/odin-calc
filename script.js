@@ -61,6 +61,7 @@ inputButton.addEventListener('mouseup', (e) =>{
     const clearButton = input == 'CE' || (input == 'DEL' && result);
     const deleteButton = input == 'DEL';
     const operateButton = operands.includes(input) && display.innerText != '';
+    const numButton = (!(display.innerText.includes('.') && input == '.')) && values.includes(input);
     if (clearButton){
         cleanOperation();
     }
@@ -101,13 +102,13 @@ inputButton.addEventListener('mouseup', (e) =>{
                 }
         }
     }
-    else if ((!(display.innerText.includes('.') && input == '.')) && values.includes(input) ){
+    else if (numButton){
         
-        if (operand != '' && nextNum == false){
+        if (operand != '' && !nextNum){
                 display.innerText = input;
                 nextNum = true;
             }
-        else if (result == true){
+        else if (result){
             display.innerText = input;
         }
         else{
