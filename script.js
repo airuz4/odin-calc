@@ -34,8 +34,8 @@ function operate(x, operand, y){
 
 }
 const display = document.querySelector('.display');
-const operands = '/+*-=';
-const values = '1234567890.'
+const operands = ['/', '+', '*', '-', '='];
+const values = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 const inputButton = document.querySelector('.calc-inputs');
 
 let nextNum = false;
@@ -58,17 +58,20 @@ function cleanOperation() {
 
 inputButton.addEventListener('mouseup', (e) =>{
     let input = e.target.innerText;
-    if (input == 'CE' || (input == 'DEL' && result)){
+    const clearButton = input == 'CE' || (input == 'DEL' && result);
+    const deleteButton = input == 'DEL';
+    const operateButton = operands.includes(input) && display.innerText != '';
+    if (clearButton){
         cleanOperation();
     }
-    else if (input == 'DEL'){
+    else if (deleteButton){
         display.innerText = display.innerText.slice(0, -1)
             if (operands.includes(display.innerText.slice(0, -1))){
             operand = '';
             }
         }
-    else if (operands.includes(input) && display.innerText != ''){
-        if(nextNum == false && input != '='){
+    else if (operateButton){
+        if(!nextNum && input != '='){
             firstNum = Number(display.innerText);
             if (operand == ''){
                 display.innerText += input;
@@ -79,7 +82,7 @@ inputButton.addEventListener('mouseup', (e) =>{
             operand = input;
             
         } 
-        else if (nextNum == true){
+        else if (nextNum){
             secondNum = Number(display.innerText);
             total = operate(firstNum, operand, secondNum);
             if (String(total).includes('.')){
@@ -92,14 +95,10 @@ inputButton.addEventListener('mouseup', (e) =>{
             nextNum = false;
             operand = '';
             result = true;
-
             if (input != '='){
                 operand = input;
                 display.innerText += operand;
                 }
-        }
-        else if (input == '='){
-            
         }
     }
     else if ((!(display.innerText.includes('.') && input == '.')) && values.includes(input) ){
