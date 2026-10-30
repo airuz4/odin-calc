@@ -1,86 +1,215 @@
-html, body{
-    height: 100%;
+/* ==========================================================================
+   DESIGN SYSTEM VARIABLES
+   Palette: Lakers Editorial / Showtime Instrument
+   ========================================================================== */
+:root {
+  /* Colors */
+  --bg-canvas: #120A2A;         /* Deep Forum Purple / Near-black canvas */
+  --bg-surface: #201348;        /* Dark Regal Purple housing */
+  --bg-display: #0B061A;        /* Deep terminal viewport */
+  
+  --text-primary: #120A2A;      /* Deep ink for gold surfaces */
+  --text-light: #F3EFE0;        /* Off-white text */
+  --text-display: #55E672;      /* Vintage green LCD display output */
+
+  --lakers-gold: #FDB927;       /* Iconic Showtime Gold */
+  --lakers-purple: #552583;     /* Official Lakers Purple */
+  --lakers-purple-hover: #692EA3;
+  --border-color: #FDB927;      /* Crisp 1px Gold structural border */
+  
+  --btn-num-bg: #FDB927;
+  --btn-num-hover: #E0A21E;
+  --btn-op-bg: #552583;
+  --btn-op-text: #F8F5EC;
+  --btn-accent-bg: #FFFFFF;     /* High-contrast crisp white for '=' */
+  --btn-accent-text: #120A2A;
+
+  /* Typography */
+  --font-display: 'Courier New', Courier, monospace;
+  --font-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-
-body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Base Reset & Layout */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
+body {
+  min-height: 100vh;
+  background-color: var(--bg-canvas);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-ui);
+  padding: 2rem;
+  color: var(--text-light);
+}
 
-button {
-  all: unset;
+/* ==========================================================================
+   CALCULATOR CONTAINER
+   ========================================================================== */
+.calc-box {
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--bg-surface);
+  border: 2px solid var(--border-color);
+  border-radius: 0; /* Strict 0px corner policy */
+  padding: 1.75rem;
+  box-shadow: 10px 10px 0px #000000; /* Deep offset shadow */
+  position: relative;
+}
+
+/* Custom spec header tag */
+.calc-box::before {
+  content: "LAKERS // SHOWTIME-808";
+  position: absolute;
+  top: -12px;
+  left: 12px;
+  background: var(--border-color);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 8px;
+  letter-spacing: 0.12em;
+}
+
+/* ==========================================================================
+   DISPLAY
+   ========================================================================== */
+.calc-display {
+  background-color: var(--bg-display);
+  border: 1px solid var(--border-color);
+  padding: 1.25rem 1rem;
+  margin-bottom: 1.5rem;
+  text-align: right;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Retro LCD scanline layer */
+.calc-display::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.25) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+}
+
+.display {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--text-display);
+  letter-spacing: 0.05em;
+  min-height: 2.75rem;
+  word-wrap: break-word;
+  word-break: break-all;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* Placeholder zero when empty */
+.display:empty::before {
+  content: "0";
+  opacity: 0.25;
+}
+
+/* ==========================================================================
+   INPUTS & ASYMMETRIC GRID
+   ========================================================================== */
+.calc-inputs {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr; /* Asymmetric balance between numbers and actions */
+  gap: 12px;
+}
+
+.calc-num {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+}
+
+.calc-operate {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+/* Span '0' across 2 columns */
+.calc-num .num:nth-child(10) {
+  grid-column: span 2;
+}
+
+/* Equal '=' button takes full width of the operator column */
+.calc-operate .operate:nth-child(7) {
+  grid-column: span 2;
+  background-color: var(--btn-accent-bg);
+  color: var(--btn-accent-text);
+  border-color: var(--btn-accent-bg);
+}
+
+/* ==========================================================================
+   BUTTON STYLES
+   ========================================================================== */
+button.num,
+button.operate {
+  appearance: none;
+  border: 1px solid var(--border-color);
+  border-radius: 0;
+  padding: 0.85rem 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
   cursor: pointer;
+  transition: all 0.05s ease-in-out;
+  user-select: none;
 }
 
-.calc-box{
-    width: 400px;
-    height: 500px;
-    display: flex;
-    background-color: gray;
-    padding: 20px;
-    flex-direction: column;
+/* Numeric Keys (Gold Surface) */
+button.num {
+  background-color: var(--btn-num-bg);
+  color: var(--text-primary);
 }
 
-.calc-display{
-    background-color: aliceblue;
-    display: flex;
-    padding: 10px;
-    flex-wrap: wrap;
+button.num:hover {
+  background-color: var(--btn-num-hover);
 }
 
-
-.display{
-    flex: 1 1 auto;
-    background-color: darkolivegreen;
-    font-size: 56px;
-    text-align: right;
-    min-height: 60px;
-    width: 100%;
-    overflow-x: auto;
+button.num:active {
+  transform: translate(2px, 2px);
 }
 
-.calc-inputs{
-    background-color: antiquewhite;
-    flex: 2 2 auto;
-    display: flex;
-    flex-direction: row;
-    padding: 5px;
-    margin-top: 4px;
+/* Operator Keys (Purple Surface) */
+button.operate {
+  background-color: var(--btn-op-bg);
+  color: var(--btn-op-text);
 }
 
-.calc-num{
-    background-color: orange;
-    flex: 2 2 auto;
-    margin-right: 4px;
-    display: flex;
-    flex-wrap: wrap;
+button.operate:hover {
+  background-color: var(--lakers-purple-hover);
 }
 
-.calc-operate{
-    background-color: blueviolet;
-    flex: 1 1 auto;
-    display: flex;
-    flex-direction: column;
-
+button.operate:active {
+  transform: translate(2px, 2px);
 }
 
-.num, .operate{
-    border: 1px solid black;
-    flex: 1 1 30%;
-    text-align: center;
+/* Equal Button Specific Interactive States */
+.calc-operate .operate:nth-child(7):hover {
+  background-color: #E2DFD2;
 }
 
-.num:hover, .operate:hover{
-    background-color: white;
-}
-
-.operate{
-    flex: 1 1 auto;
-}
-
-.zero{
-    flex: 1 1 64%; 
+/* Accessible focus styling */
+button:focus-visible {
+  outline: 2px dashed var(--lakers-gold);
+  outline-offset: 2px;
 }
